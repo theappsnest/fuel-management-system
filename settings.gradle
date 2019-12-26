@@ -1,2 +1,6 @@
 rootProject.name = 'Fuel Management System'
+include 'app'
+include 'core'
+include 'ui'
+include 'db'
 
