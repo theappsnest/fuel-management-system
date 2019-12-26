@@ -1,6 +1,6 @@
 apply plugin: 'application'
 
-group 'org.example'
+group 'com.godavari.appsnest.fms'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8

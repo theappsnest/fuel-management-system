@@ -1,4 +1,4 @@
-group 'org.example'
+group 'com.godavari.appsnest.fms'
 version '1.0-SNAPSHOT'
 
 subprojects {
