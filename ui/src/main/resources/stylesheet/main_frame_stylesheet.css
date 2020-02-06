@@ -1,0 +1,27 @@
+
+//primary:rgb(220,181,68)
+//primary-light:rgb(228,228,226)
+//primary-dark:rgb(199,199,201)
+
+.menu_pane
+{
+-fx-background-color: rgb(220,181,68);
+-fx-padding:10
+}
+
+.menu-bar
+{
+    -fx-background-color:rgb(228,228,226);
+}
+
+.menu:hover{
+-fx-background-color:rgb(199,199,201)
+}
+.menu:showing
+{
+-fx-background-color:rgb(199,199,201)
+}
+
+.menu-item:focused {
+     -fx-background-color: rgb(220,181,68);
+}

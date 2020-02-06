@@ -1,0 +1,31 @@
+#color
+{
+primary:rgb(220,181,68);
+primary-light:rgb(228,228,226);
+primary-dark:rgb(199,199,201);
+}
+
+.tree-cell:filled:selected:focused,
+.tree-cell:filled:selected {
+    -fx-background-color:rgb(220,181,68);
+}
+
+.tree-view
+{
+-fx-background-color:rgb(228,228,226);
+}
+
+.tree-cell {
+-fx-text-fill: black;
+-fx-font-size:15;
+-fx-background-color: transparent;
+-fx-border-color:rgb(199,199,201);
+-fx-padding: 5px;
+-fx-border-insets: 5px;
+-fx-border-width:2px;
+-fx-background-insets: 5px;
+}
+
+.tree-cell:empty {
+     visibility:hidden;
+}

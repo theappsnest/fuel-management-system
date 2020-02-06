@@ -1,10 +1,25 @@
 apply plugin: 'application'
 
 group 'com.godavari.appsnest.fms'
-version '1.0-SNAPSHOT'
+version appVersion
+
+dependencies {
+    compile project(":ui")
+}
 
 sourceCompatibility = 1.8
 
 application {
     mainClassName = 'com.godavari.appsnest.fms.Main'
+}
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes(
+                'Main-Class': 'com.godavari.appsnest.fms.Main',
+        )
+    }
+    baseName = 'power indhan system'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }

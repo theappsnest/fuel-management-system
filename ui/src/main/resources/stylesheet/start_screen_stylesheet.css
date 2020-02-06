@@ -1,0 +1,42 @@
+.pane
+{
+-fx-background-color:rgb(255,255,255);
+-fx-font-size: 15;
+}
+
+#hbox-bottom
+{
+-fx-background-color:rgb(228,228,226);
+-fx-border-color: rgb(199,199,201);
+-fx-border-width: 2 ;
+-fx-border-radius: 15;
+-fx-background-radius: 15;
+}
+
+.image-view
+{
+-fx-background-color:rgb(222,230,229);
+//-fx-border-color: blue;
+//-fx-border-insets: 5;
+//-fx-border-width: 3;
+//-fx-border-style: dashed;
+-fx-border-color: blue ;
+-fx-border-width: 5 ;
+-fx-border-style: segments(10, 15, 15, 15)  line-cap round;
+}
+
+.button
+{
+-fx-background-color:rgb(220,181,68);
+}
+
+VBox
+{
+-fx-spacing:10;
+}
+
+.jfx-text-field
+{
+-jfx-focus-color:rgb(220,181,68)
+}
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" stylesheets="@../stylesheet/main_frame_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.godavari.appsnest.fms.ui.controller.MainFrameController">
+    <children>
+        <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+            <AnchorPane>
+               <children>
+                        <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="900.0" styleClass="menu_pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <JFXHamburger fx:id="jfxHamburger" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Region disable="true" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <MenuBar maxWidth="-Infinity" HBox.hgrow="ALWAYS">
+                           <menus>
+                              <Menu mnemonicParsing="false" text="%about_us">
+                                <items>
+                                  <MenuItem fx:id="miAboutApplication" mnemonicParsing="false" text="%application_name" />
+                                    <MenuItem fx:id="miAboutCompany" mnemonicParsing="false" text="%company_name" />
+                                </items>
+                              </Menu>
+                           </menus>
+                        </MenuBar>
+                            </children>
+                        </HBox>
+               </children>
+            </AnchorPane>
+                <AnchorPane prefHeight="561.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+                    <children>
+                  <AnchorPane fx:id="anchorPane" prefHeight="350.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <JFXDrawer fx:id="jfxDrawer" defaultDrawerSize="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

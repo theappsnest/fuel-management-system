@@ -1,5 +1,10 @@
 group 'com.godavari.appsnest.fms'
-version '1.0-SNAPSHOT'
+version appVersion
 
 sourceCompatibility = 1.8
+
+dependencies {
+    compile project(':db')
+    compile project(':report')
+}
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxWidth="1.7976931348623157E308" prefHeight="460.0" stylesheets="@../../stylesheet/list/navigatoin_drawer_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.godavari.appsnest.fms.ui.controller.list.NavigationDrawerController">
+    <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="pane-logo">
+         <children>
+              <ImageView fx:id="ivImage" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../../image/application_logo.png" />
+                  </image>
+              </ImageView>
+         </children>
+      </StackPane>
+      <Separator prefWidth="200.0" />
+      <VBox maxWidth="1.7976931348623157E308" styleClass="drawer-content" VBox.vgrow="ALWAYS">
+         <children>
+              <JFXButton fx:id="bJfxHodManage" alignment="CENTER" buttonType="RAISED" maxWidth="1.7976931348623157E308" text="%department_string" />
+              <JFXButton fx:id="bJfxVehicleAssigned" alignment="CENTER" buttonType="RAISED" maxWidth="1.7976931348623157E308" text="%vehicle_string" />
+              <JFXButton fx:id="bJfxAccount" alignment="CENTER" buttonType="RAISED" maxWidth="1.7976931348623157E308" text="%account_string" />
+              <JFXButton fx:id="bJfxReports" alignment="CENTER" buttonType="RAISED" maxWidth="1.7976931348623157E308" text="%reports_string" />
+         </children>
+      </VBox>
+    </children>
+</VBox>

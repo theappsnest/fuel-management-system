@@ -1,0 +1,18 @@
+.pane-logo
+{
+-fx-background-color: white
+}
+
+.button:focused
+{
+
+-fx-background-color: rgb(220,181,68)
+}
+
+.drawer-content
+{
+-fx-background-color: rgb(228,228,226);
+-fx-font-size:15;
+-fx-spacing:10;
+}
+

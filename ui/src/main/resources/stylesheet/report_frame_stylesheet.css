@@ -1,0 +1,40 @@
+.main-content
+{
+-fx-padding:15;
+-fx-font-size:18;
+}
+
+VBox
+{
+-fx-spacing:20;
+-fx-background-color: rgb(228,228,226);
+}
+
+HBox
+{
+-fx-spacing:10;
+}
+
+StackPane
+{
+-fx-font-size:23;
+}
+
+AnchorPane{
+-fx-background-color: rgb(199,199,201)
+}
+
+.button
+{
+-fx-background-color: rgb(220,181,68)
+}
+
+.jfx-date-picker
+{
+-jfx-default-color:rgb(220,181,68)
+}
+
+.jfx-text-field
+{
+-jfx-focus-color:rgb(220,181,68)
+}

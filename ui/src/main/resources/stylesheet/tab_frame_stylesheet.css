@@ -1,0 +1,20 @@
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: rgb(228,228,226);
+        //-fx-opacity: 100;
+}
+
+.jfx-tab-pane .tab:selected
+{
+    -fx-background-color: rgb(199,199,201);
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    //-fx-font-weight: bold;
+}
+
+.jfx-tab-pane .headers-region .tab-selected-line {
+    -fx-background-color: rgb(220,181,68);
+}

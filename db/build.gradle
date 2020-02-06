@@ -1,5 +1,12 @@
 group 'com.godavari.appsnest.fms'
-version '1.0-SNAPSHOT'
+version appVersion
 
 sourceCompatibility = 1.8
+
+dependencies {
+// https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.30.1'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
 

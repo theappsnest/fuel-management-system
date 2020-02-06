@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+
+
+<JFXComboBox fx:id="jfxComboBox" labelFloat="true" promptText="%select_department" stylesheets="@../../stylesheet/combobox/combobox_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.godavari.appsnest.fms.ui.controller.combobox.SavedDepartmentComboBoxController" />

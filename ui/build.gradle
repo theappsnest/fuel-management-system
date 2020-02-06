@@ -1,4 +1,17 @@
 group 'com.godavari.appsnest.fms'
-version '1.0-SNAPSHOT'
+version appVersion
 
 sourceCompatibility = 1.8
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.jfoenix/jfoenix
+    compile group: 'com.jfoenix', name: 'jfoenix', version: '9.0.9'
+
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
+
+    // https://mvnrepository.com/artifact/org.controlsfx/controlsfx
+    compile group: 'org.controlsfx', name: 'controlsfx', version: '11.0.1'
+
+    compile project(':core')
+}

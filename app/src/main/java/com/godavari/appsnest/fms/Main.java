@@ -1,5 +1,7 @@
 package com.godavari.appsnest.fms;
 
+import com.godavari.appsnest.fms.ui.frame.startactivation.StartScreenFrame;
+import javafx.application.Application;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -12,8 +14,9 @@ public class Main {
 
         //Log in console in and log file
         logger.info("Log4j appender configuration is successful, Application started");
+        logger.info("Build Version: " +Main.class.getPackage().getImplementationVersion());
 
         // Launching the Start Screen Ui
-        //Application.launch(StartScreenFrame.class, args);
+        Application.launch(StartScreenFrame.class, args);
     }
 }

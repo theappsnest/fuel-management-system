@@ -22,5 +22,11 @@ subprojects {
 
         // https://mvnrepository.com/artifact/com.ibm.icu/icu4j
         compile group: 'com.ibm.icu', name: 'icu4j', version: '65.1'
+
+        compile 'joda-time:joda-time:2.10.5'
+
+        // https://mvnrepository.com/artifact/org.projectlombok/lombok
+        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
     }
 }
