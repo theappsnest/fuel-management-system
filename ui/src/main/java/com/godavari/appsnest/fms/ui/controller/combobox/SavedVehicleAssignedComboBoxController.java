@@ -70,7 +70,12 @@ public class SavedVehicleAssignedComboBoxController extends BaseComboBoxControll
                 return false;
             }
         });
-        return filteredList.get(0);
+
+        if (filteredList != null && !filteredList.isEmpty()) {
+            return filteredList.get(0);
+        }
+
+        return null;
     }
 
     @Override
@@ -109,7 +114,9 @@ public class SavedVehicleAssignedComboBoxController extends BaseComboBoxControll
     protected void selectVehicleAssigned(VehicleAssignedSelectionEvent vehicleAssignedSelectionEvent) {
         log.info("selectVehicleAssigned");
         if (vehicleAssignedSelectionEvent != null) {
-            jfxComboBox.getSelectionModel().select(vehicleAssignedSelectionEvent.getVehicleAssigned());
+            //if (vehicleAssignedSelectionEvent.getVehicleAssigned().getId()>0) {
+                jfxComboBox.getSelectionModel().select(vehicleAssignedSelectionEvent.getVehicleAssigned());
+            //}
         }
     }
 }

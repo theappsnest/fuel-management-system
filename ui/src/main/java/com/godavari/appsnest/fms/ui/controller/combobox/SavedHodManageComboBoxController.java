@@ -79,7 +79,11 @@ public class SavedHodManageComboBoxController extends BaseComboBoxController<Hod
                 return false;
             }
         });
-        return filteredList.get(0);
+
+        if (filteredList != null && !filteredList.isEmpty()) {
+            return filteredList.get(0);
+        }
+        return null;
     }
 
     @Override

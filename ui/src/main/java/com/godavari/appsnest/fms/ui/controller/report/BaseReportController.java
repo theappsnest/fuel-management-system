@@ -25,8 +25,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import static com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailCode.FAIL_CODE_BASE_REPORT_INPUT_ISSUE;
-import static com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailCode.RESULT_TYPE_FAIL;
+import static com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailCode.*;
+import static com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailCode.FAIL_CODE_EXCEPTION_THROWN;
 
 @Log4j
 public abstract class BaseReportController<T> extends BaseFrameController<T> {
@@ -160,6 +160,8 @@ public abstract class BaseReportController<T> extends BaseFrameController<T> {
         if (resultMessage.getResultType() == RESULT_TYPE_FAIL) {
             switch (resultMessage.getResultCode()) {
                 case FAIL_CODE_BASE_REPORT_INPUT_ISSUE:
+                case FAIL_CODE_SQL_EXCEPTION_THROWN:
+                case FAIL_CODE_EXCEPTION_THROWN:
                     Utility.showDialogBox(Alert.AlertType.ERROR, resultMessage.getResultString());
                     break;
             }

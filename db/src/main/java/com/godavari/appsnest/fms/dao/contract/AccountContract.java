@@ -32,7 +32,7 @@ public class AccountContract extends BaseContract {
 
     public static List<String> COLUMN_NAME_LIST = new ArrayList<String>() {
         {
-            addAll(BASE_COLUMN_NAME_LIST);
+            add(COLUMN_ID);
             add(COLUMN_HOD_MANAGE_ID);
             add(COLUMN_VEHICLE_ASSIGNED_ID);
             add(COLUMN_DATE);
@@ -42,6 +42,7 @@ public class AccountContract extends BaseContract {
             add(COLUMN_OWNER);
             add(COLUMN_MILEAGE_KM_PER_HOUR);
             add(COLUMN_CREATED_AT);
+            add(COLUMN_UPDATED_AT);
         }
     };
 

@@ -56,7 +56,7 @@ public class SavedAccountListController extends BaseListController<Account> {
                     HeadOfDepartment headOfDepartment = hodManage.getHeadOfDepartment();
                     Department department = hodManage.getDepartment();
                     Vehicle vehicle = null;
-                    if (account.getVehicleAssigned() != null) {
+                    if (account.getVehicleAssigned() != null){// && account.getVehicleAssigned().getId()>0) {
                         VehicleAssigned vehicleAssigned = account.getVehicleAssigned();
                         vehicle = vehicleAssigned.getVehicle();
                     }

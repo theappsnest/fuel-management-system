@@ -36,10 +36,10 @@ public class Account extends GenericModelOperationImpl<Account> {
     private double input;
     private double output;
     private String owner;
-    private float mileageKmPerHour;
+    private double mileageKmPerHour;
 
     public Account(HodManage hodManage, VehicleAssigned vehicleAssigned, LocalDateTime dateTime, double currentReading, double input, double output, String owner
-    ,float mileageKmPerHour) {
+            , float mileageKmPerHour) {
         this.hodManage = hodManage;
         this.vehicleAssigned = vehicleAssigned;
         this.currentReading = currentReading;
@@ -60,7 +60,8 @@ public class Account extends GenericModelOperationImpl<Account> {
                 .append("currentReading" + " : " + currentReading + "\n")
                 .append("in" + " : " + input + "\n")
                 .append("out" + " : " + output + "\n")
-                .append("owner" + " : " + owner + "\n");
+                .append("owner" + " : " + owner + "\n")
+                .append("mileageKmPerHour" + " : " + mileageKmPerHour + "\n");
 
         return stringBuilder.toString();
     }
@@ -79,13 +80,17 @@ public class Account extends GenericModelOperationImpl<Account> {
         return getAccountDao().update(this);
     }
 
+    public static Account getAccountByVehicleAndDateTime(Vehicle vehicleSelected,
+                                                         LocalDateTime currentSelectedLocalDateTime) throws SQLException {
+        return getAccountDao().getAccountByVehicleAndDateTime(vehicleSelected, currentSelectedLocalDateTime);
+    }
+
     public static List<Account> getAll() throws SQLException {
-        return ((AccountDaoImpl)getAccountDao()).getAll1();
+        return getAccountDao().getAll();
     }
 
     @Override
-    public int delete()throws SQLException
-    {
+    public int delete() throws SQLException {
         return getAccountDao().delete(this);
     }
 }

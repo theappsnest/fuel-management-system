@@ -42,6 +42,7 @@ public class GenerateReportVehicles extends BaseReport {
         rowSubHeaderMap.put(startColumn++, resourceBundle.getString("time"));
         rowSubHeaderMap.put(startColumn++, resourceBundle.getString("output"));
         rowSubHeaderMap.put(startColumn++, resourceBundle.getString("current_reading"));
+        rowSubHeaderMap.put(startColumn++, resourceBundle.getString("mileage_km_per_hour"));
         rowSubHeaderMap.put(startColumn++, resourceBundle.getString("department"));
         rowSubHeaderMap.put(startColumn++, resourceBundle.getString("hod"));
         rowSubHeaderMap.put(startColumn++, resourceBundle.getString("owner"));
@@ -74,6 +75,7 @@ public class GenerateReportVehicles extends BaseReport {
                     createContentCell(row, "time", null, account.getDateTime().toLocalTime());
                     createContentCell(row, "output", null, account.getOutput());
                     createContentCell(row, "current_reading", null, account.getCurrentReading());
+                    createContentCell(row, "mileage_km_per_hour", null, account.getMileageKmPerHour());
                     createContentCell(row, "department", null, account.getHodManage().getDepartment().getName());
                     createContentCell(row, "hod", null, account.getHodManage().getHeadOfDepartment().getName());
                     createContentCell(row, "owner", null, account.getOwner());

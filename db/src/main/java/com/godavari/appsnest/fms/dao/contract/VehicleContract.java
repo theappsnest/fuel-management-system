@@ -19,9 +19,11 @@ public class VehicleContract extends BaseContract{
 
     public static List<String> COLUMN_NAME_LIST = new ArrayList<String>() {
         {
-            addAll(BASE_COLUMN_NAME_LIST);
+            add(COLUMN_ID);
             add(COLUMN_VEHICLE_NO);
             add(COLUMN_VEHICLE_TYPE_ID);
+            add(COLUMN_CREATED_AT);
+            add(COLUMN_UPDATED_AT);
         }
     };
 

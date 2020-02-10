@@ -17,8 +17,10 @@ public class HeadOfDepartmentContract extends BaseContract {
 
     public static List<String> COLUMN_NAME_LIST = new ArrayList<String>() {
         {
-            addAll(BASE_COLUMN_NAME_LIST);
+            add(COLUMN_ID);
             add(COLUMN_NAME);
+            add(COLUMN_CREATED_AT);
+            add(COLUMN_UPDATED_AT);
         }
     };
 

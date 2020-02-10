@@ -12,13 +12,15 @@ public class VehicleTypeContract extends BaseContract {
 
     public static final String TABLE_COLUMN_ID = DatabaseConstant.createTableColumnNameConstant(TABLE_VEHICLE_TYPE_STRING, COLUMN_ID);
     public static final String TABLE_COLUMN_TYPE = DatabaseConstant.createTableColumnNameConstant(TABLE_VEHICLE_TYPE_STRING, COLUMN_TYPE);
-    public static final String TABLE_COLUMN_CREATED_AT = DatabaseConstant.createTableColumnNameConstant(TABLE_VEHICLE_TYPE_STRING,COLUMN_CREATED_AT);
-    public static final String TABLE_COLUMN_UPDATED_AT = DatabaseConstant.createTableColumnNameConstant(TABLE_VEHICLE_TYPE_STRING,COLUMN_UPDATED_AT);
+    public static final String TABLE_COLUMN_CREATED_AT = DatabaseConstant.createTableColumnNameConstant(TABLE_VEHICLE_TYPE_STRING, COLUMN_CREATED_AT);
+    public static final String TABLE_COLUMN_UPDATED_AT = DatabaseConstant.createTableColumnNameConstant(TABLE_VEHICLE_TYPE_STRING, COLUMN_UPDATED_AT);
 
     public static List<String> COLUMN_NAME_LIST = new ArrayList<String>() {
         {
-            addAll(BASE_COLUMN_NAME_LIST);
+            add(COLUMN_ID);
             add(COLUMN_TYPE);
+            add(COLUMN_CREATED_AT);
+            add(COLUMN_UPDATED_AT);
         }
     };
 

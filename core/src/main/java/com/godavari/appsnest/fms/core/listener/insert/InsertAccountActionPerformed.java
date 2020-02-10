@@ -22,10 +22,13 @@ import static com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailC
 public class InsertAccountActionPerformed extends BaseActionPerformedListener {
 
     private Account account;
+    private Account lastAccountForSelectedVehicleAssigned;
 
-    public InsertAccountActionPerformed(IOnActionPerformed onActionPerformed, Account account) {
+    public InsertAccountActionPerformed(IOnActionPerformed onActionPerformed, Account account,
+                                        Account lastAccountForSelectedVehicleAssigned) {
         super(onActionPerformed);
         this.account = account;
+        this.lastAccountForSelectedVehicleAssigned = lastAccountForSelectedVehicleAssigned;
     }
 
     @Override
@@ -84,12 +87,19 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
         }
 
         // both cant be more than zero at a time, only one entry at the tim
-        if (input >0 && output>0)
-        {
+        if (input > 0 && output > 0) {
             // fail code
             return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "in or out one at a time");
         }
-        //todo previous current reading check
+
+        if (account.getCurrentReading()!=0) {
+            if (lastAccountForSelectedVehicleAssigned != null) {
+                if (account.getCurrentReading() <= lastAccountForSelectedVehicleAssigned.getCurrentReading()) {
+                    // fail code
+                    return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "current reading must be greater than last reading value");
+                }
+            }
+        }
 
         String owner = StringUtils.isEmpty(account.getOwner()) ? null : account.getOwner().trim();
         if (StringUtils.isEmpty(owner)) {
@@ -113,14 +123,14 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
             }
 
             Account accountInsertedSuccessfully = account.insert();
-            log.info("inserted successfully, Account: "+ accountInsertedSuccessfully);
+            log.info("inserted successfully, Account: " + accountInsertedSuccessfully);
             // success code
             onActionPerformed.onActionPerformedResult(new ResultMessage(RESULT_TYPE_SUCCESS, SUCCESS_CODE_INSERT_ACCOUNT, "Account successfully inserted"));
             return;
         } catch (SQLException e) {
             log.error(e);
             onActionPerformed.onActionPerformedResult(new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_SQL_EXCEPTION_THROWN, e.getMessage()));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             log.error(e);
             onActionPerformed.onActionPerformedResult(new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_EXCEPTION_THROWN, ResourceString.getString("fail_code_string_exception_thrown")));

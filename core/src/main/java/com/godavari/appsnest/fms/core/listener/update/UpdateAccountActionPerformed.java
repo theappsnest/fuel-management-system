@@ -22,10 +22,13 @@ import static com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailC
 public class UpdateAccountActionPerformed extends BaseActionPerformedListener {
 
     private Account account;
+    private Account lastAccountForSelectedVehicleAssigned;
 
-    public UpdateAccountActionPerformed(IOnActionPerformed onActionPerformed, Account account) {
+    public UpdateAccountActionPerformed(IOnActionPerformed onActionPerformed, Account account,
+                                        Account lastAccountForSelectedVehicleAssigned) {
         super(onActionPerformed);
         this.account = account;
+        this.lastAccountForSelectedVehicleAssigned = lastAccountForSelectedVehicleAssigned;
     }
 
     @Override
@@ -89,7 +92,15 @@ public class UpdateAccountActionPerformed extends BaseActionPerformedListener {
             // fail code
             return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_UPDATE_ACCOUNT_INPUT_ISSUE, "in or out one at a time");
         }
-        //todo previous current reading check
+
+        if (account.getCurrentReading()!=0) {
+            if (lastAccountForSelectedVehicleAssigned != null) {
+                if (account.getCurrentReading() <= lastAccountForSelectedVehicleAssigned.getCurrentReading()) {
+                    // fail code
+                    return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_UPDATE_ACCOUNT_INPUT_ISSUE, "current reading must be greater than last reading value");
+                }
+            }
+        }
 
         String owner = StringUtils.isEmpty(account.getOwner()) ? null : account.getOwner().trim();
         if (StringUtils.isEmpty(owner)) {

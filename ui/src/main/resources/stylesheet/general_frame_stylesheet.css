@@ -21,7 +21,14 @@ HBox
 -fx-padding:10;
 -fx-spacing:10;
 -fx-font-size:18;
+}
 
+.last-leading-pane
+{
+-fx-padding:10;
+-fx-spacing:10;
+-fx-font-size:18;
+-fx-background-color: rgb(199,199,201)
 }
 
 AnchorPane{

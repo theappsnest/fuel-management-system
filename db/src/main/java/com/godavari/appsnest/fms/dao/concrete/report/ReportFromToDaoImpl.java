@@ -5,7 +5,6 @@ import com.godavari.appsnest.fms.dao.contract.*;
 import com.godavari.appsnest.fms.dao.model.*;
 import com.godavari.appsnest.fms.dao.model.report.ReportFromToModel;
 import com.godavari.appsnest.fms.dao.utility.DatabaseConstant;
-import com.godavari.appsnest.fms.dao.utility.UtilityMethod;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.Connection;
@@ -15,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.godavari.appsnest.fms.dao.contract.AccountContract.TABLE_COLUMN_MILEAGE_KM_PER_HOUR;
 import static com.godavari.appsnest.fms.dao.utility.DatabaseConstant.VIEW_CURRENT_STOCK;
 
 @Log4j
@@ -74,20 +74,25 @@ public class ReportFromToDaoImpl extends GenericDaoImpl<Object> {
         hodManage.setDepartment(department);
         hodManage.setCurrent(resultSet.getBoolean(projectionNameList.indexOf(HodManageContract.TABLE_COLUMN_CURRENT) + 1));
 
-        VehicleType vehicleType = new VehicleType();
-        vehicleType.setId(resultSet.getInt(projectionNameList.indexOf(VehicleTypeContract.TABLE_COLUMN_ID) + 1));
-        vehicleType.setType(resultSet.getString(projectionNameList.indexOf(VehicleTypeContract.TABLE_COLUMN_TYPE) + 1));
+        VehicleAssigned vehicleAssigned = null;
+        int vehicleAssignedId = resultSet.getInt(projectionNameList.indexOf(VehicleAssignedContract.TABLE_COLUMN_ID) + 1);
+        if (vehicleAssignedId>0)
+        {
+            VehicleType vehicleType = new VehicleType();
+            vehicleType.setId(resultSet.getInt(projectionNameList.indexOf(VehicleTypeContract.TABLE_COLUMN_ID) + 1));
+            vehicleType.setType(resultSet.getString(projectionNameList.indexOf(VehicleTypeContract.TABLE_COLUMN_TYPE) + 1));
 
-        Vehicle vehicle = new Vehicle();
-        vehicle.setId(resultSet.getInt(projectionNameList.indexOf(VehicleContract.TABLE_COLUMN_ID) + 1));
-        vehicle.setVehicleNo(resultSet.getString(projectionNameList.indexOf(VehicleContract.TABLE_COLUMN_VEHICLE_NO) + 1));
-        vehicle.setVehicleType(vehicleType);
+            Vehicle vehicle = new Vehicle();
+            vehicle.setId(resultSet.getInt(projectionNameList.indexOf(VehicleContract.TABLE_COLUMN_ID) + 1));
+            vehicle.setVehicleNo(resultSet.getString(projectionNameList.indexOf(VehicleContract.TABLE_COLUMN_VEHICLE_NO) + 1));
+            vehicle.setVehicleType(vehicleType);
 
-        VehicleAssigned vehicleAssigned = new VehicleAssigned();
-        vehicleAssigned.setId(resultSet.getInt(projectionNameList.indexOf(VehicleAssignedContract.TABLE_COLUMN_ID) + 1));
-        vehicleAssigned.setVehicle(vehicle);
-        vehicleAssigned.setDepartment(department);
-        vehicleAssigned.setCurrent(resultSet.getBoolean(projectionNameList.indexOf(VehicleAssignedContract.TABLE_COLUMN_CURRENT) + 1));
+            vehicleAssigned = new VehicleAssigned();
+            vehicleAssigned.setId(resultSet.getInt(projectionNameList.indexOf(VehicleAssignedContract.TABLE_COLUMN_ID) + 1));
+            vehicleAssigned.setVehicle(vehicle);
+            vehicleAssigned.setDepartment(department);
+            vehicleAssigned.setCurrent(resultSet.getBoolean(projectionNameList.indexOf(VehicleAssignedContract.TABLE_COLUMN_CURRENT) + 1));
+        }
 
         Account account = new Account();
         account.setId(resultSet.getInt(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_ID) + 1));
@@ -97,6 +102,7 @@ public class ReportFromToDaoImpl extends GenericDaoImpl<Object> {
         account.setCurrentReading(resultSet.getDouble(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_CURRENT_READING) + 1));
         account.setInput(resultSet.getDouble(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_IN) + 1));
         account.setOutput(resultSet.getDouble(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_OUT) + 1));
+        account.setMileageKmPerHour(resultSet.getDouble(projectionNameList.indexOf(TABLE_COLUMN_MILEAGE_KM_PER_HOUR)+1));
         account.setOwner(resultSet.getString(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_OWNER) + 1));
 
         return account;

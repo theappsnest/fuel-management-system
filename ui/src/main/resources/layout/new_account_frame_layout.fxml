@@ -78,7 +78,13 @@
                                                       </ButtonBar>
                                                    </children>
                                                 </VBox>
-                                                <fx:include source="custom/current_reading_layout.fxml" AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                                <fx:include source="custom/current_reading_layout.fxml" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="10.0" />
+                                                <VBox fx:id="vBoxLastReading" styleClass="last-leading-pane" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="100.0">
+                                                   <children>
+                                                      <Label text="%last_reading" />
+                                                      <Label fx:id="lLastReadingValue" text="Label" />
+                                                   </children>
+                                                </VBox>
                                              </children>
                                           </AnchorPane>
                                        </content>

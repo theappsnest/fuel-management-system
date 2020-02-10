@@ -11,7 +11,7 @@ public class BaseContract {
     public static List<String> BASE_COLUMN_NAME_LIST = new ArrayList<String>() {
         {
            add(COLUMN_ID);
-           add(COLUMN_CREATED_AT);
-           add(COLUMN_UPDATED_AT);
+           //add(COLUMN_CREATED_AT);
+           //add(COLUMN_UPDATED_AT);
         }};
 }

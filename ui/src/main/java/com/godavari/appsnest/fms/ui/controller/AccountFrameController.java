@@ -8,23 +8,27 @@ import com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailCode;
 import com.godavari.appsnest.fms.dao.model.Account;
 import com.godavari.appsnest.fms.dao.model.HodManage;
 import com.godavari.appsnest.fms.dao.model.VehicleAssigned;
+import com.godavari.appsnest.fms.ui.controller.eventlistener.JFXTextFieldChangeListener;
 import com.godavari.appsnest.fms.ui.eventbus.MyEventBus;
 import com.godavari.appsnest.fms.ui.eventbus.event.*;
+import com.godavari.appsnest.fms.ui.utility.ResourceString;
 import com.godavari.appsnest.fms.ui.utility.Utility;
 import com.google.common.eventbus.Subscribe;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -34,7 +38,7 @@ import java.util.ResourceBundle;
 import static com.godavari.appsnest.fms.core.utility.ActionPerformedSuccessFailCode.*;
 
 @Log4j
-public class AccountFrameController extends ChildBaseFrameController<Account> {
+public class AccountFrameController extends ChildBaseFrameController<Account> implements ChangeListener {
 
     @FXML
     private JFXDatePicker jfxDatePicker;
@@ -54,6 +58,12 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
     @FXML
     private JFXTextField jfxTFOwner;
 
+    @FXML
+    private VBox vBoxLastReading;
+
+    @FXML
+    private Label lLastReadingValue;
+
     private LocalDateTime dateTime;
     private HodManage hodManage;
     private VehicleAssigned vehicleAssigned;
@@ -63,6 +73,8 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
     private String owner;
 
     private Account account;
+
+    private Account lastAccountForSelectedVehicleAssigned;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,7 +89,10 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
         jfxTimePicker.set24HourView(true);
 
         jfxDatePicker.setValue(LocalDate.now());
+        jfxDatePicker.valueProperty().addListener(this);
+
         jfxTimePicker.setValue(LocalTime.now());
+        jfxDatePicker.valueProperty().addListener(this);
 
         jfxDatePicker.setConverter(new StringConverter<LocalDate>() {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -128,6 +143,22 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
                 return localTime;
             }
         });
+
+        jfxTFInput.textProperty().addListener
+                (new JFXTextFieldChangeListener(jfxTFInput, JFXTextFieldChangeListener.INPUT_TYPE_DOUBLE));
+        jfxTFOutput.textProperty().addListener
+                (new JFXTextFieldChangeListener(jfxTFOutput, JFXTextFieldChangeListener.INPUT_TYPE_DOUBLE));
+        jfxTFCurrentReading.textProperty().addListener
+                (new JFXTextFieldChangeListener(jfxTFCurrentReading, JFXTextFieldChangeListener.INPUT_TYPE_DOUBLE));
+
+        updateUi(null);
+    }
+
+    @Override
+    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+        if (newValue != null) {
+            setLastAccountForSelectedVehicleAssigned();
+        }
     }
 
     @Override
@@ -163,12 +194,12 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
             updateUi(null);
         } else if (actionEvent.getSource() == jfxBInsert) {
             populateObject();
-            new InsertAccountActionPerformed(this, account).actionPerform();
+            new InsertAccountActionPerformed(this, account, lastAccountForSelectedVehicleAssigned).actionPerform();
         } else if (actionEvent.getSource() == jfxBDelete) {
             new DeleteAccountActionPerformed(this, account).actionPerform();
         } else if (actionEvent.getSource() == jfxBUpdate) {
             populateObject();
-            new UpdateAccountActionPerformed(this, account).actionPerform();
+            new UpdateAccountActionPerformed(this, account, lastAccountForSelectedVehicleAssigned).actionPerform();
         }
     }
 
@@ -185,6 +216,8 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
             output = 0;
             owner = null;
 
+            lastAccountForSelectedVehicleAssigned = null;
+
             jfxDatePicker.setValue(null);
             jfxTimePicker.setValue(null);
             MyEventBus.post(new HodManageRefreshEvent());
@@ -193,6 +226,9 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
             jfxTFInput.setText(null);
             jfxTFOutput.setText(null);
             jfxTFOwner.setText(null);
+
+            lLastReadingValue.setText(null);
+            vBoxLastReading.setVisible(false);
 
             jfxDatePicker.requestFocus();
 
@@ -238,7 +274,13 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
 
         account.setHodManage(hodManage);
         account.setVehicleAssigned(vehicleAssigned);
-        account.setCurrentReading(Utility.getDoubleParseValue(jfxTFCurrentReading.getText()));
+        currentReading = Utility.getDoubleParseValue(jfxTFCurrentReading.getText());
+        account.setCurrentReading(currentReading);
+
+        if (lastAccountForSelectedVehicleAssigned != null && currentReading!=0) {
+            account.setMileageKmPerHour(currentReading - lastAccountForSelectedVehicleAssigned.getCurrentReading());
+        }
+
         account.setInput(Utility.getDoubleParseValue(jfxTFInput.getText()));
         account.setOutput(Utility.getDoubleParseValue(jfxTFOutput.getText()));
         account.setOwner(jfxTFOwner.getText());
@@ -257,6 +299,7 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
         log.info("selectVehicleAssigned, vehicleAssignedSelectionEvent: " + vehicleAssignedSelectionEvent);
         if (vehicleAssignedSelectionEvent != null) {
             vehicleAssigned = vehicleAssignedSelectionEvent.getVehicleAssigned();
+            setLastAccountForSelectedVehicleAssigned();
         }
     }
 
@@ -265,6 +308,29 @@ public class AccountFrameController extends ChildBaseFrameController<Account> {
         log.info("selectAccount, accountSelectionEvent: " + accountSelectionEvent);
         if (accountSelectionEvent != null) {
             updateUi(accountSelectionEvent.getAccount());
+        }
+    }
+
+    private void setLastAccountForSelectedVehicleAssigned() {
+        log.info("setLastAccountForSelectedVehicleAssigned");
+        try {
+            if (jfxDatePicker.getValue() != null && jfxTimePicker.getValue() != null
+                    && vehicleAssigned != null) {
+                vBoxLastReading.visibleProperty().setValue(true);
+
+                lastAccountForSelectedVehicleAssigned = Account.getAccountByVehicleAndDateTime(vehicleAssigned.getVehicle(),
+                        LocalDateTime.of(jfxDatePicker.getValue(), jfxTimePicker.getValue()));
+                if (lastAccountForSelectedVehicleAssigned != null) {
+                    lLastReadingValue.setText(lastAccountForSelectedVehicleAssigned.getDateTime() + Utility.TEXT_CONNECTOR + lastAccountForSelectedVehicleAssigned.getCurrentReading());
+                } else {
+                    lLastReadingValue.setText(ResourceString.getString("no_last_reading_available"));
+                }
+                log.info(lastAccountForSelectedVehicleAssigned);
+            } else {
+                vBoxLastReading.visibleProperty().setValue(false);
+            }
+        } catch (Exception e) {
+            log.error(e);
         }
     }
 }
