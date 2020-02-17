@@ -18,6 +18,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
 import lombok.extern.log4j.Log4j;
 
 import java.net.URL;
@@ -65,7 +66,7 @@ public class VehicleAssignedFrameController extends ChildBaseFrameController<Veh
                 case SUCCESS_CODE_UPDATE_VEHICLE_ASSIGNED:
                     MyEventBus.post(new VehicleAssignedRefreshEvent());
                     updateUi(null);
-                    Utility.showDialogBox(Alert.AlertType.INFORMATION, resultMessage.getResultString());
+                    Utility.showSnackBar((Pane)jfxBReset.getScene().getRoot(), resultMessage.getResultString());
                     break;
             }
         } else if (resultMessage.getResultType() == ActionPerformedSuccessFailCode.RESULT_TYPE_FAIL) {

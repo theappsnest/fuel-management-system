@@ -1,0 +1,11 @@
+.jfx-snackbar-content {
+    -fx-background-color: rgb(199,199,201);
+}
+.jfx-snackbar-toast {
+    -fx-font-size: 20;
+}
+
+.label{
+   -fx-padding: 5;
+   -fx-font-size: 25;
+}

@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
 import lombok.extern.log4j.Log4j;
 
 import java.net.URL;
@@ -78,7 +79,7 @@ public class HodFrameController extends ChildBaseFrameController<HeadOfDepartmen
                 case SUCCESS_CODE_DELETE_HEAD_OF_DEPARTMENT:
                     MyEventBus.post(new HodRefreshEvent());
                     updateUi(null);
-                    Utility.showDialogBox(Alert.AlertType.INFORMATION, resultMessage.getResultString());
+                    Utility.showSnackBar((Pane)jfxBReset.getScene().getRoot(), resultMessage.getResultString());
                     break;
             }
         } else if (resultMessage.getResultType() == ActionPerformedSuccessFailCode.RESULT_TYPE_FAIL) {

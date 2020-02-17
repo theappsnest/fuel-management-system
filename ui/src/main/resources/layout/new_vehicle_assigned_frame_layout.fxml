@@ -61,8 +61,8 @@
                                                 <fx:include source="combobox/saved_vehicle_type_combo_box_layout.fxml" />
                                                 <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                                    <buttons>
-                                                      <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_vehicle_assigned" />
                                                       <JFXButton fx:id="jfxBInsert" buttonType="RAISED" text="%insert_vehicle_assigned" />
+                                                       <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_vehicle_assigned" />
                                                       <JFXButton fx:id="jfxBDelete" buttonType="RAISED" text="%delete_vehicle_assigned" />
                                                       <JFXButton fx:id="jfxBUpdate" buttonType="RAISED" text="%update_vehicle_assigned" />
                                                    </buttons>

@@ -42,23 +42,23 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
         LocalDateTime localDateTime = account.getDateTime();
         if (localDateTime == null) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_date_time_not_selected"));
         }
 
         if (localDateTime.toLocalDate() == null) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Select Date");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_date_not_selected"));
         }
 
         if (localDateTime.toLocalTime() == null) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Select Time");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_time_not_selected"));
         }
 
         HodManage hodManage = account.getHodManage();
         if (hodManage == null) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Select Department");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_department_not_selected"));
         }
 
         /*VehicleAssigned vehicleAssigned = account.getVehicleAssigned();
@@ -72,31 +72,31 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
 
         if (input < 0) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Input cant be negative");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_input_cant_negative"));
         }
 
         if (output < 0) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Output cant be negative");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_output_cant_negative"));
         }
 
         // both cant be zero at the time
         if (input == 0 && output == 0) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Both input and output cant be empty");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_input_output_cant_empty"));
         }
 
         // both cant be more than zero at a time, only one entry at the tim
         if (input > 0 && output > 0) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "in or out one at a time");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_input_output_one_at_time"));
         }
 
         if (account.getCurrentReading()!=0) {
             if (lastAccountForSelectedVehicleAssigned != null) {
                 if (account.getCurrentReading() <= lastAccountForSelectedVehicleAssigned.getCurrentReading()) {
                     // fail code
-                    return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "current reading must be greater than last reading value");
+                    return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_current_reading_must_be_greater_than_last_reading"));
                 }
             }
         }
@@ -104,7 +104,7 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
         String owner = StringUtils.isEmpty(account.getOwner()) ? null : account.getOwner().trim();
         if (StringUtils.isEmpty(owner)) {
             // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Owner cant be empty");
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_owner_cant_empty"));
         }
 
         return null;
@@ -125,7 +125,7 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
             Account accountInsertedSuccessfully = account.insert();
             log.info("inserted successfully, Account: " + accountInsertedSuccessfully);
             // success code
-            onActionPerformed.onActionPerformedResult(new ResultMessage(RESULT_TYPE_SUCCESS, SUCCESS_CODE_INSERT_ACCOUNT, "Account successfully inserted"));
+            onActionPerformed.onActionPerformedResult(new ResultMessage(RESULT_TYPE_SUCCESS, SUCCESS_CODE_INSERT_ACCOUNT, ResourceString.getString("success_insert_account_inserted_successfully")));
             return;
         } catch (SQLException e) {
             log.error(e);

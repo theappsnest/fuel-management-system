@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import lombok.extern.log4j.Log4j;
@@ -172,7 +173,7 @@ public class AccountFrameController extends ChildBaseFrameController<Account> im
                 case SUCCESS_CODE_UPDATE_ACCOUNT:
                     MyEventBus.post(new AccountRefreshEvent());
                     updateUi(null);
-                    Utility.showDialogBox(Alert.AlertType.INFORMATION, resultMessage.getResultString());
+                    Utility.showSnackBar((Pane) jfxDatePicker.getScene().getRoot(), resultMessage.getResultString());
                     break;
 
             }
@@ -270,6 +271,8 @@ public class AccountFrameController extends ChildBaseFrameController<Account> im
 
         if (jfxDatePicker.getValue() != null && jfxTimePicker.getValue() != null) {
             account.setDateTime(LocalDateTime.of(jfxDatePicker.getValue(), jfxTimePicker.getValue()));
+        } else {
+            account.setDateTime(null);
         }
 
         account.setHodManage(hodManage);
@@ -277,7 +280,7 @@ public class AccountFrameController extends ChildBaseFrameController<Account> im
         currentReading = Utility.getDoubleParseValue(jfxTFCurrentReading.getText());
         account.setCurrentReading(currentReading);
 
-        if (lastAccountForSelectedVehicleAssigned != null && currentReading!=0) {
+        if (lastAccountForSelectedVehicleAssigned != null && currentReading != 0) {
             account.setMileageKmPerHour(currentReading - lastAccountForSelectedVehicleAssigned.getCurrentReading());
         }
 

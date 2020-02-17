@@ -1,10 +1,14 @@
 package com.godavari.appsnest.fms.ui.utility;
 
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import lombok.extern.log4j.Log4j;
@@ -25,6 +29,13 @@ public class Utility {
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(Utility.class.getClassLoader().getResource("stylesheet/dialog_box_stylesheet.css").toExternalForm());
         return alert.showAndWait();
+    }
+
+    public static void showSnackBar(Pane container, String contentMessage)
+    {
+        JFXSnackbar bar = new JFXSnackbar(container);
+        bar.getStylesheets().add(Utility.class.getClassLoader().getResource("stylesheet/snack_bar_stylesheet.css").toExternalForm());
+        bar.enqueue(new JFXSnackbar.SnackbarEvent(new Label(contentMessage)));
     }
 
     public static int getIntegerParseValue(String value) {

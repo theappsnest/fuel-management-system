@@ -70,8 +70,8 @@
                                                       <JFXTextField fx:id="jfxTFOwner" labelFloat="true" promptText="%owner_value" />
                                                       <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                                          <buttons>
-                                                            <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_account" />
                                                             <JFXButton fx:id="jfxBInsert" buttonType="RAISED" text="%insert_account" />
+                                                             <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_account" />
                                                             <JFXButton fx:id="jfxBDelete" buttonType="RAISED" text="%delete_account" />
                                                             <JFXButton fx:id="jfxBUpdate" buttonType="RAISED" text="%update_account" />
                                                          </buttons>

@@ -59,8 +59,8 @@
                                                 <JFXTextField fx:id="jfxTfVehicleType" labelFloat="true" promptText="%vehicle_type" />
                                                 <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                                    <buttons>
-                                                      <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_vehicle_type" />
                                                       <JFXButton fx:id="jfxBInsert" buttonType="RAISED" text="%insert_vehicle_type" />
+                                                       <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_vehicle_type" />
                                                       <JFXButton fx:id="jfxBDelete" buttonType="RAISED" text="%delete_vehicle_type" />
                                                       <JFXButton fx:id="jfxBUpdate" buttonType="RAISED" text="%update_vehicle_type" />
                                                    </buttons>

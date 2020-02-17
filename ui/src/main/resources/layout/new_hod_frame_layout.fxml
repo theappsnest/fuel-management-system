@@ -59,8 +59,8 @@
                                                 <JFXTextField fx:id="jfxTfHodName" labelFloat="true" promptText="%hod_name" />
                                                 <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                                    <buttons>
-                                                      <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_hod" />
                                                       <JFXButton fx:id="jfxBInsert" buttonType="RAISED" text="%insert_hod" />
+                                                       <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_hod" />
                                                       <JFXButton fx:id="jfxBDelete" buttonType="RAISED" text="%delete_hod" />
                                                       <JFXButton fx:id="jfxBUpdate" buttonType="RAISED" text="%update_hod" />
                                                    </buttons>

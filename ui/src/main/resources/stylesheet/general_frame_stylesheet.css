@@ -40,6 +40,14 @@ AnchorPane{
 -fx-background-color: rgb(220,181,68)
 }
 
+.jfx-snackbar-content {
+    -fx-background-color: RED;
+}
+.jfx-snackbar-toast {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 20;
+}
+
 .jfx-date-picker
 {
 -jfx-default-color:rgb(220,181,68)

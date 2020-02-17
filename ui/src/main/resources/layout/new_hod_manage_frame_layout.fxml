@@ -60,8 +60,8 @@
                                                 <fx:include source="combobox/saved_hod_combo_box_layout.fxml" />
                                                 <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                                    <buttons>
-                                                      <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_department" />
                                                       <JFXButton fx:id="jfxBInsert" buttonType="RAISED" text="%insert_department" />
+                                                       <JFXButton fx:id="jfxBReset" buttonType="RAISED" text="%reset_department" />
                                                       <JFXButton fx:id="jfxBDelete" buttonType="RAISED" text="%delete_department" />
                                                       <JFXButton fx:id="jfxBUpdate" buttonType="RAISED" text="%update_department" />
                                                    </buttons>
