@@ -4,6 +4,7 @@ import com.godavari.appsnest.fms.dao.abstracts.GenericModelOperationImpl;
 import com.godavari.appsnest.fms.dao.daofactory.DaoFactory;
 import com.godavari.appsnest.fms.dao.interfaces.IVehicleAssignedDao;
 import com.godavari.appsnest.fms.dao.utility.DatabaseConstant;
+import com.godavari.appsnest.fms.dao.utility.UtilityMethod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,16 @@ public class VehicleAssigned extends GenericModelOperationImpl<VehicleAssigned> 
     public VehicleAssigned(Department department, Vehicle vehicle) {
         this.department = department;
         this.vehicle = vehicle;
+    }
+
+    @Override
+    public void formatObject() {
+        if (department != null) {
+            department.formatObject();
+        }
+        if (vehicle != null) {
+            vehicle.formatObject();
+        }
     }
 
     public String toString() {

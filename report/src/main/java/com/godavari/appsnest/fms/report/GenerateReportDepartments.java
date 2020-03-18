@@ -3,11 +3,13 @@ package com.godavari.appsnest.fms.report;
 import com.godavari.appsnest.fms.dao.model.Account;
 import com.godavari.appsnest.fms.dao.model.Department;
 import com.godavari.appsnest.fms.dao.model.report.DepartmentAllModel;
-import com.godavari.appsnest.fms.dao.model.report.DepartmentVehicleRowModel;
 import com.godavari.appsnest.fms.dao.model.report.ReportDepartmentsModel;
-import com.godavari.appsnest.fms.dao.model.report.ReportFromToModel;
+import com.godavari.appsnest.fms.report.utility.FontUtility;
+import com.godavari.appsnest.fms.report.utility.ResourceString;
 import lombok.extern.log4j.Log4j;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.File;
@@ -54,6 +56,11 @@ public class GenerateReportDepartments extends BaseReport {
 
         int rowNo = ROW_SUB_HEADER_ROW_NO;
 
+        CellStyle tableMainHeaderStyle = FontUtility.getTableMainHeaderStyle(workbook);
+        CellStyle cellValueStyle = FontUtility.getCellValueStyle(workbook);
+        CellStyle cellBoldValueStyle = FontUtility.getCellBoldValueStyle(workbook, null);
+        CellStyle cellBoldValueStyleLeft = FontUtility.getCellBoldValueStyle(workbook, HorizontalAlignment.LEFT);
+
         for (int i = 0; i < departmentAllModelList.size(); i++) {
             DepartmentAllModel departmentAllModel = departmentAllModelList.get(i);
             Department department = departmentAllModel.getDepartment();
@@ -61,6 +68,9 @@ public class GenerateReportDepartments extends BaseReport {
             Row row = sheet.createRow(rowNo++);
             Cell cell = row.createCell(ROW_SUB_HEADER_COLUMN_NO);
             cell.setCellValue(resourceBundle.getString("department") + " " + department.getName());
+            cell.setCellStyle(tableMainHeaderStyle);
+
+            sheet.addMergedRegion(FontUtility.getCellRangeAddress(sheet, row.getRowNum(), row.getRowNum(), ROW_HEADER_COL_NO, rowSubHeaderMap.size()));
 
             if (!departmentAllModel.getDepartmentVehicleRowModelList().isEmpty()) {
                 writeRowSubHeader(rowNo++);
@@ -68,17 +78,24 @@ public class GenerateReportDepartments extends BaseReport {
                     row = sheet.createRow(rowNo++);
 
                     Account account = departmentAllModel.getDepartmentVehicleRowModelList().get(j).getAccount();
-                    createContentCell(row, "sr_no", null, j + 1);
-                    createContentCell(row, "date", null, account.getDateTime().toLocalDate());
-                    createContentCell(row, "time", null, account.getDateTime().toLocalTime());
-                    createContentCell(row, "output", null, account.getOutput());
-                    createContentCell(row, "hod", null, account.getHodManage().getHeadOfDepartment().getName());
-                    createContentCell(row, "owner", null, account.getOwner());
+                    createContentCell(row, "sr_no", null, j + 1, cellValueStyle);
+                    createContentCell(row, "date", null, account.getDateTime().toLocalDate(), cellValueStyle);
+                    createContentCell(row, "time", null, account.getDateTime().toLocalTime(), cellValueStyle);
+                    createContentCell(row, "output", null, account.getOutput(), cellValueStyle);
+                    createContentCell(row, "hod", null, account.getHodManage().getHeadOfDepartment().getName(), cellValueStyle);
+                    createContentCell(row, "owner", null, account.getOwner(), cellValueStyle);
                 }
                 row = sheet.createRow(rowNo++);
-                createContentCell(row, "output", null, departmentAllModel.getDepartmentVehicleRowModelList().get(0).getTotal());
+                createContentCell(row, "output", null, departmentAllModel.getDepartmentVehicleRowModelList().get(0).getTotal(), cellBoldValueStyle);
+
+                Cell hodSignCell = row.createCell(getRowSubHeaderKeyForValue(ResourceString.getString("hod")));
+                hodSignCell.setCellValue(resourceBundle.getString("hod_sign") + " : ");
+                hodSignCell.setCellStyle(cellBoldValueStyleLeft);
+                sheet.addMergedRegion(FontUtility.getCellRangeAddress(sheet, row.getRowNum(), row.getRowNum(), hodSignCell.getColumnIndex(), rowSubHeaderMap.size()));
+
                 rowNo++;
             }
+            rowNo++;
         }
     }
 }

@@ -10,4 +10,8 @@ public class Utility {
         return localDate.format(formatter) + " " + localDate.getYear();
     }
 
+    public static final String dateFormatter(LocalDate localDate) {
+        String pattern = "dd-MM-yyyy";
+        return localDate.format(DateTimeFormatter.ofPattern(pattern));
+    }
 }

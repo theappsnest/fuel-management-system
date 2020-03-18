@@ -13,4 +13,10 @@ import java.util.List;
 public class VehicleAllModel {
     private Vehicle vehicle;
     private List<DepartmentVehicleRowModel> departmentVehicleRowModelList;
+
+    public void formatObject() {
+        if (vehicle != null) {
+            vehicle.formatObject();
+        }
+    }
 }

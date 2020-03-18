@@ -35,6 +35,8 @@ public class ReportVehiclesDaoImpl extends GenericDaoImpl<Object> {
         departmentVehicleRowModel.setAccount(account);
         departmentVehicleRowModel.setTotal(resultSet.getDouble(resultSet.findColumn("total")));
 
+        departmentVehicleRowModel.formatObject();
+
         return departmentVehicleRowModel;
     }
 
@@ -66,6 +68,7 @@ public class ReportVehiclesDaoImpl extends GenericDaoImpl<Object> {
         VehicleAllModel vehicleAllModel = new VehicleAllModel();
         vehicleAllModel.setVehicle(vehicle);
         vehicleAllModel.setDepartmentVehicleRowModelList(departmentVehicleRowModelList);
+        vehicleAllModel.formatObject();
 
         return vehicleAllModel;
     }

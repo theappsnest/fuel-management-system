@@ -31,6 +31,7 @@ public class ReportMasterDaoImpl extends GenericDaoImpl<Object> {
         masterModel.setOutput(resultSet.getDouble(resultSet.findColumn(ReportMasterContract.COLUMN_OUTPUT)));
         masterModel.setClosingStock(resultSet.getDouble(resultSet.findColumn(ReportMasterContract.COLUMN_MONTHLY_CLOSING)));
 
+        masterModel.formatObject();
         return masterModel;
     }
 

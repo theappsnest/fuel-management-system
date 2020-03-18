@@ -13,4 +13,10 @@ import java.util.List;
 public class DepartmentAllModel {
     private Department department;
     private List<DepartmentVehicleRowModel> departmentVehicleRowModelList;
+
+    public void formatObject() {
+        if (department != null) {
+            department.formatObject();
+        }
+    }
 }

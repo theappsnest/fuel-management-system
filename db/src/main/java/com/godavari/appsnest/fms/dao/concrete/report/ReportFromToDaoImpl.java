@@ -105,6 +105,7 @@ public class ReportFromToDaoImpl extends GenericDaoImpl<Object> {
         account.setMileageKmPerHour(resultSet.getDouble(projectionNameList.indexOf(TABLE_COLUMN_MILEAGE_KM_PER_HOUR)+1));
         account.setOwner(resultSet.getString(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_OWNER) + 1));
 
+        account.formatObject();
         return account;
     }
 

@@ -3,6 +3,7 @@ package com.godavari.appsnest.fms.dao.model;
 import com.godavari.appsnest.fms.dao.abstracts.GenericModelOperationImpl;
 import com.godavari.appsnest.fms.dao.daofactory.DaoFactory;
 import com.godavari.appsnest.fms.dao.interfaces.IVehicleTypeDao;
+import com.godavari.appsnest.fms.dao.utility.UtilityMethod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,11 @@ public class VehicleType extends GenericModelOperationImpl<VehicleType> {
 
     public VehicleType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public void formatObject() {
+        type = UtilityMethod.formatString(type);
     }
 
     @Override

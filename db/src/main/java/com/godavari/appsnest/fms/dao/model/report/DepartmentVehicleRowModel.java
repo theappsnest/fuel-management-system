@@ -11,4 +11,10 @@ import lombok.extern.log4j.Log4j;
 public class DepartmentVehicleRowModel {
     private Account account;
     private double total;
+
+    public void formatObject() {
+        if (account != null) {
+            account.formatObject();
+        }
+    }
 }

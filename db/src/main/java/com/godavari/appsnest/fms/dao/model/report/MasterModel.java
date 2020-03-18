@@ -17,4 +17,8 @@ public class MasterModel {
     private double input;
     private double output;
     private double closingStock;
+
+    public void formatObject()
+    {
+    }
 }

@@ -3,8 +3,10 @@ package com.godavari.appsnest.fms.report;
 import com.godavari.appsnest.fms.dao.model.report.Master1Model;
 import com.godavari.appsnest.fms.dao.model.report.ReportMaster1Model;
 import com.godavari.appsnest.fms.dao.utility.DatabaseConstant;
+import com.godavari.appsnest.fms.report.utility.FontUtility;
 import com.godavari.appsnest.fms.report.utility.Utility;
 import lombok.extern.log4j.Log4j;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.File;
@@ -51,20 +53,22 @@ public class GenerateReportMaster1 extends BaseReport {
     protected void writeMainContent() {
         List<Master1Model> master1ModelList = reportMaster1Model.getMaster1ModelList();
 
+        CellStyle cellValueStyle=FontUtility.getCellValueStyle(workbook);
+
         for (int i = 0; i < master1ModelList.size(); i++) {
             Row row = sheet.createRow(CONTENT_START_ROW_NO + i);
 
             Master1Model master1Model = master1ModelList.get(i);
-            createContentCell(row, "sr_no", null, i + 1);
-            createContentCell(row, "department", null, master1Model.getDepartmentName());
-            createContentCell(row, "vehicle_no", null, master1Model.getVehicleNo());
+            createContentCell(row, "sr_no", null, i + 1, cellValueStyle);
+            createContentCell(row, "department", null, master1Model.getDepartmentName(), cellValueStyle);
+            createContentCell(row, "vehicle_no", null, master1Model.getVehicleNo(),cellValueStyle );
 
             List<Double> monthlyConsumption = master1Model.getMonthlyConsumption();
 
             for (int j = 0; j < monthlyConsumption.size(); j++) {
                 createContentCell(row, null,
                         Utility.getMonthYear(reportMaster1Model.getFromLocalDate().plusMonths(j)),
-                        monthlyConsumption.get(j));
+                        monthlyConsumption.get(j), cellValueStyle);
             }
         }
     }

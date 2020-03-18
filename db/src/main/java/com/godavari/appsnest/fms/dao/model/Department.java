@@ -3,6 +3,7 @@ package com.godavari.appsnest.fms.dao.model;
 import com.godavari.appsnest.fms.dao.abstracts.GenericModelOperationImpl;
 import com.godavari.appsnest.fms.dao.daofactory.DaoFactory;
 import com.godavari.appsnest.fms.dao.interfaces.IDepartmentDao;
+import com.godavari.appsnest.fms.dao.utility.UtilityMethod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,11 @@ public class Department extends GenericModelOperationImpl<Department> {
 
     public Department(String name) {
         this.name = name;
+    }
+
+    @Override
+    public void formatObject() {
+        name = UtilityMethod.formatString(name);
     }
 
     @Override

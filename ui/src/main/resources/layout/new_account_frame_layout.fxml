@@ -61,12 +61,12 @@
                                                 <VBox focusTraversable="true" layoutX="-8.0" spacing="10.0" styleClass="main-content" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
                                                       <JFXDatePicker fx:id="jfxDatePicker" promptText="%select_date" />
-                                                      <JFXTimePicker fx:id="jfxTimePicker" editable="true" promptText="%select_time" />
-                                                      <fx:include source="combobox/saved_hod_manage_combo_box_layout.fxml" />
-                                                      <fx:include source="combobox/saved_vehicle_assigned_combo_box_layout.fxml" />
                                                       <JFXTextField fx:id="jfxTFInput" labelFloat="true" promptText="%input_value" />
                                                       <JFXTextField fx:id="jfxTFOutput" labelFloat="true" promptText="%output_value" />
+                                                      <fx:include source="combobox/saved_hod_manage_combo_box_layout.fxml" />
+                                                      <fx:include source="combobox/saved_vehicle_assigned_combo_box_layout.fxml" />
                                                       <JFXTextField fx:id="jfxTFCurrentReading" labelFloat="true" promptText="%current_reading_value" />
+                                                      <JFXTimePicker fx:id="jfxTimePicker" editable="true" promptText="%select_time" />
                                                       <JFXTextField fx:id="jfxTFOwner" labelFloat="true" promptText="%owner_value" />
                                                       <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                                          <buttons>
@@ -79,7 +79,7 @@
                                                    </children>
                                                 </VBox>
                                                 <fx:include source="custom/current_reading_layout.fxml" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="10.0" />
-                                                <VBox fx:id="vBoxLastReading" styleClass="last-leading-pane" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="100.0">
+                                                <VBox fx:id="vBoxLastReading" styleClass="last-leading-pane" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="200.0">
                                                    <children>
                                                       <Label text="%last_reading" />
                                                       <Label fx:id="lLastReadingValue" text="Label" />

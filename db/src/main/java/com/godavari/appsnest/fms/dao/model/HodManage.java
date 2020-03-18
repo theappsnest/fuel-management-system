@@ -3,6 +3,7 @@ package com.godavari.appsnest.fms.dao.model;
 import com.godavari.appsnest.fms.dao.abstracts.GenericModelOperationImpl;
 import com.godavari.appsnest.fms.dao.daofactory.DaoFactory;
 import com.godavari.appsnest.fms.dao.interfaces.IHodManageDao;
+import com.godavari.appsnest.fms.dao.utility.UtilityMethod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,16 @@ public class HodManage extends GenericModelOperationImpl<HodManage> {
     public HodManage(Department department, HeadOfDepartment headOfDepartment) {
         this.department = department;
         this.headOfDepartment = headOfDepartment;
+    }
+
+    @Override
+    public void formatObject() {
+        if (department != null) {
+            department.formatObject();
+        }
+        if (headOfDepartment != null) {
+            headOfDepartment.formatObject();
+        }
     }
 
     public String toString() {
@@ -72,8 +83,7 @@ public class HodManage extends GenericModelOperationImpl<HodManage> {
         return getHodManageDao().getAllCurrent(current);
     }
 
-    public static HodManage getRowById(int hodManageId) throws SQLException
-    {
+    public static HodManage getRowById(int hodManageId) throws SQLException {
         return getHodManageDao().getRowById(hodManageId);
     }
 

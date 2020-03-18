@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="USE_RELEASE_OPTION" value="false" />
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
       <profile name="Gradle Imported" enabled="true">
@@ -11,11 +12,6 @@
         <module name="Fuel_Management_System.ui.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Fuel_Management_System.main" target="1.8" />
-      <module name="Fuel_Management_System.test" target="1.8" />
-      <module name="Fuel_Management_System.test.main" target="1.8" />
-      <module name="Fuel_Management_System.test.test" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>

@@ -112,7 +112,10 @@ public class AccountFrameController extends ChildBaseFrameController<Account> im
                 LocalDate localDate = null;
                 if (!StringUtils.isEmpty(text) || !StringUtils.isEmpty(text.trim())) {
                     String[] textSplit = text.split("/");
-                    if (textSplit.length == 2) {
+                    if (textSplit.length == 1) {
+                        LocalDate now = LocalDate.now();
+                        localDate = LocalDate.of(now.getYear(), now.getMonthValue(), Integer.valueOf(textSplit[0]));
+                    } else if (textSplit.length == 2) {
                         localDate = LocalDate.of(LocalDate.now().getYear(),
                                 Integer.valueOf(textSplit[1]), Integer.valueOf(textSplit[0]));
                     } else {

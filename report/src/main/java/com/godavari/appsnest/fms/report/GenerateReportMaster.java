@@ -2,8 +2,10 @@ package com.godavari.appsnest.fms.report;
 
 import com.godavari.appsnest.fms.dao.model.report.MasterModel;
 import com.godavari.appsnest.fms.dao.model.report.ReportMasterModel;
+import com.godavari.appsnest.fms.report.utility.FontUtility;
 import com.godavari.appsnest.fms.report.utility.Utility;
 import lombok.extern.log4j.Log4j;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.File;
@@ -48,17 +50,19 @@ public class GenerateReportMaster extends BaseReport {
     protected void writeMainContent() {
         List<MasterModel> masterModelList = reportMasterModel.getMasterModelList();
 
+        CellStyle cellValueStyle=FontUtility.getCellValueStyle(workbook);
+
         for (int i = 0; i < masterModelList.size(); i++) {
             Row row = sheet.createRow(CONTENT_START_ROW_NO + i);
 
             MasterModel masterModel = masterModelList.get(i);
 
-            createContentCell(row, "sr_no", null, i + 1);
-            createContentCell(row, "month_year", null, Utility.getMonthYear(masterModel.getMonthYear()));
-            createContentCell(row, "opening_stock", null, masterModel.getOpeningStock());
-            createContentCell(row, "inword", null, masterModel.getInput());
-            createContentCell(row, "dispatch", null,masterModel.getOutput());
-            createContentCell(row, "closing_stock", null, masterModel.getClosingStock());
+            createContentCell(row, "sr_no", null, i + 1, cellValueStyle);
+            createContentCell(row, "month_year", null, Utility.getMonthYear(masterModel.getMonthYear()), cellValueStyle);
+            createContentCell(row, "opening_stock", null, masterModel.getOpeningStock(), cellValueStyle);
+            createContentCell(row, "inword", null, masterModel.getInput(),cellValueStyle );
+            createContentCell(row, "dispatch", null,masterModel.getOutput(),cellValueStyle );
+            createContentCell(row, "closing_stock", null, masterModel.getClosingStock(), cellValueStyle);
         }
     }
 }

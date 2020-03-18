@@ -45,4 +45,21 @@ public class UtilityMethod {
 
         return fileFilter;
     }
+
+    public static String formatStringUpperCase(String text) {
+        if (StringUtils.isEmpty(text)) {
+            return null;
+        }
+
+        return text.toUpperCase().trim();
+    }
+
+    public static String formatString(String text) {
+        if (StringUtils.isEmpty(text)) {
+            return null;
+        }
+
+        return StringUtils.capitalize(text.trim());
+    }
+
 }

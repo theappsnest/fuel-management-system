@@ -45,27 +45,11 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
             return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_date_time_not_selected"));
         }
 
+
         if (localDateTime.toLocalDate() == null) {
             // fail code
             return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_date_not_selected"));
         }
-
-        if (localDateTime.toLocalTime() == null) {
-            // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_time_not_selected"));
-        }
-
-        HodManage hodManage = account.getHodManage();
-        if (hodManage == null) {
-            // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_department_not_selected"));
-        }
-
-        /*VehicleAssigned vehicleAssigned = account.getVehicleAssigned();
-        if (vehicleAssigned == null) {
-            // fail code
-            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Select Vehicle");
-        }*/
 
         double input = account.getInput();
         double output = account.getOutput();
@@ -92,6 +76,20 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
             return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_input_output_one_at_time"));
         }
 
+
+        HodManage hodManage = account.getHodManage();
+        if (hodManage == null) {
+            // fail code
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_department_not_selected"));
+        }
+
+        /*VehicleAssigned vehicleAssigned = account.getVehicleAssigned();
+        if (vehicleAssigned == null) {
+            // fail code
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, "Select Vehicle");
+        }*/
+
+
         if (account.getCurrentReading()!=0) {
             if (lastAccountForSelectedVehicleAssigned != null) {
                 if (account.getCurrentReading() <= lastAccountForSelectedVehicleAssigned.getCurrentReading()) {
@@ -99,6 +97,11 @@ public class InsertAccountActionPerformed extends BaseActionPerformedListener {
                     return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_current_reading_must_be_greater_than_last_reading"));
                 }
             }
+        }
+
+        if (localDateTime.toLocalTime() == null) {
+            // fail code
+            return new ResultMessage(RESULT_TYPE_FAIL, FAIL_CODE_INSERT_ACCOUNT_INPUT_ISSUE, ResourceString.getString("fail_insert_account_time_not_selected"));
         }
 
         String owner = StringUtils.isEmpty(account.getOwner()) ? null : account.getOwner().trim();

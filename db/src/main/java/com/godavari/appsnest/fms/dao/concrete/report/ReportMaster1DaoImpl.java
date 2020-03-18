@@ -42,6 +42,7 @@ public class ReportMaster1DaoImpl extends GenericDaoImpl<Object> {
         }
 
         master1Model.setMonthlyConsumption(monthlyTotal);
+        master1Model.formatObject();
         return master1Model;
     }
 

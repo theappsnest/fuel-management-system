@@ -1,9 +1,12 @@
 package com.godavari.appsnest.fms.report;
 
+import com.godavari.appsnest.fms.report.utility.FontUtility;
 import com.godavari.appsnest.fms.report.utility.ResourceString;
+import com.godavari.appsnest.fms.report.utility.Utility;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -70,7 +73,7 @@ public abstract class BaseReport {
 
         Row row = sheet.createRow(rowNo);
 
-        //CellStyle cellStyle = FontUtility.getTableSubHeaderStyle(workbook);
+        CellStyle cellStyle = FontUtility.getTableSubHeaderStyle(workbook);
 
         Iterator rowSubHeaderMapIterator = rowSubHeaderMap.entrySet().iterator();
 
@@ -78,13 +81,13 @@ public abstract class BaseReport {
             Map.Entry<Integer, String> mapElement = (Map.Entry) rowSubHeaderMapIterator.next();
 
             Cell cell = row.createCell(mapElement.getKey());
-            //cell.setCellStyle(cellStyle);
+            cell.setCellStyle(cellStyle);
             cell.setCellValue(mapElement.getValue());
             cell.getCellStyle().setWrapText(true);
         }
     }
 
-    protected Cell createContentCell(Row row, String resourceKey, String columnName, Object value) {
+    protected Cell createContentCell(Row row, String resourceKey, String columnName, Object value, CellStyle cellStyle) {
 
         String rowSubHeaderValue = null;
         if (!StringUtils.isEmpty(resourceKey)) {
@@ -94,6 +97,7 @@ public abstract class BaseReport {
         }
 
         Cell cell = row.createCell(getRowSubHeaderKeyForValue(rowSubHeaderValue));
+        cell.setCellStyle(cellStyle);
         if (value instanceof String) {
             cell.setCellValue((String) value);
         } else if (value instanceof Integer) {
@@ -105,7 +109,7 @@ public abstract class BaseReport {
         } else if (value instanceof Float) {
             cell.setCellValue((Float) value);
         } else if (value instanceof LocalDate) {
-            cell.setCellValue(((LocalDate) value).toString());
+            cell.setCellValue(Utility.dateFormatter((LocalDate) value));
         } else if (value instanceof Date) {
             cell.setCellValue((Date) value);
         } else if (value instanceof LocalDateTime) {

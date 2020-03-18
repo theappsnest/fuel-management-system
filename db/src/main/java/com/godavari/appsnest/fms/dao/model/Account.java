@@ -4,6 +4,7 @@ import com.godavari.appsnest.fms.dao.abstracts.GenericModelOperationImpl;
 import com.godavari.appsnest.fms.dao.concrete.AccountDaoImpl;
 import com.godavari.appsnest.fms.dao.daofactory.DaoFactory;
 import com.godavari.appsnest.fms.dao.interfaces.IAccountDao;
+import com.godavari.appsnest.fms.dao.utility.UtilityMethod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,6 +49,17 @@ public class Account extends GenericModelOperationImpl<Account> {
         this.output = output;
         this.owner = owner;
         this.mileageKmPerHour = mileageKmPerHour;
+    }
+
+    @Override
+    public void formatObject() {
+        if (hodManage != null) {
+            hodManage.formatObject();
+        }
+        if (vehicleAssigned != null) {
+            vehicleAssigned.formatObject();
+        }
+        owner = UtilityMethod.formatString(owner);
     }
 
     @Override

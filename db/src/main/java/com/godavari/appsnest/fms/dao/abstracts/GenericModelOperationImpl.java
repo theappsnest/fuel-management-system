@@ -18,4 +18,6 @@ public abstract class GenericModelOperationImpl<T> implements IGenericModelOpera
     public int update() throws SQLException {
         throw DatabaseConstant.getThrowsFunctionNotSupported("Model Classes", "update");
     }
+
+    public abstract void formatObject();
 }
