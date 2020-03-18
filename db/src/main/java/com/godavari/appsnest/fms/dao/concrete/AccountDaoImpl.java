@@ -69,21 +69,21 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements IAccountD
 
     @Override
     public List<Account> getAll() throws SQLException {
-        String query = "SELECT * FROM "+DatabaseConstant.TABLE_ACCOUNT_STRING;
+        String query = "SELECT * FROM " + DatabaseConstant.TABLE_ACCOUNT_STRING;
         query += " INNER JOIN " + TABLE_HOD_MANAGE_STRING + " ON " + TABLE_COLUMN_HOD_MANAGE_ID + " = " + HodManageContract.TABLE_COLUMN_ID;
         query += " LEFT OUTER JOIN " + TABLE_VEHICLE_ASSIGNED_STRING + " ON " + TABLE_COLUMN_VEHICLE_ASSIGNED_ID + " = " + VehicleAssignedContract.TABLE_COLUMN_ID;
         query += " LEFT OUTER JOIN " + TABLE_DEPARTMENT_STRING + " ON " + HodManageContract.TABLE_COLUMN_DEPT_ID + " = " + DepartmentContract.TABLE_COLUMN_ID;
         query += " INNER JOIN " + TABLE_HEAD_OF_DEPARTMENT_STRING + " ON " + HodManageContract.TABLE_COLUMN_HOD_ID + " = " + HeadOfDepartmentContract.TABLE_COLUMN_ID;
         query += " LEFT OUTER JOIN " + TABLE_VEHICLE_STRING + " ON " + VehicleAssignedContract.TABLE_COLUMN_VEHICLE_ID + " = " + VehicleContract.TABLE_COLUMN_ID;
         query += " LEFT OUTER JOIN " + TABLE_VEHICLE_TYPE_STRING + " ON " + VehicleContract.TABLE_COLUMN_VEHICLE_TYPE_ID + " = " + VehicleTypeContract.TABLE_COLUMN_ID;
-        query += " ORDER BY " + TABLE_COLUMN_DATE + " ASC ";
+        query += " ORDER BY " + TABLE_COLUMN_DATE + " DESC " + " limit " + " 50 ";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         List<Account> accountList = new ArrayList<>();
         while (resultSet.next()) {
-            accountList.add(getRow(resultSet,projectionNameList));
+            accountList.add(getRow(resultSet, projectionNameList));
         }
 
         return accountList;
@@ -107,8 +107,7 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements IAccountD
 
         VehicleAssigned vehicleAssigned = null;
         int vehicleAssignedId = resultSet.getInt(projectionNameList.indexOf(VehicleAssignedContract.TABLE_COLUMN_ID) + 1);
-        if (vehicleAssignedId>0)
-        {
+        if (vehicleAssignedId > 0) {
             VehicleType vehicleType = new VehicleType();
             vehicleType.setId(resultSet.getInt(projectionNameList.indexOf(VehicleTypeContract.TABLE_COLUMN_ID) + 1));
             vehicleType.setType(resultSet.getString(projectionNameList.indexOf(VehicleTypeContract.TABLE_COLUMN_TYPE) + 1));
@@ -133,7 +132,7 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements IAccountD
         account.setCurrentReading(resultSet.getDouble(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_CURRENT_READING) + 1));
         account.setInput(resultSet.getDouble(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_IN) + 1));
         account.setOutput(resultSet.getDouble(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_OUT) + 1));
-        account.setMileageKmPerHour(resultSet.getDouble(projectionNameList.indexOf(TABLE_COLUMN_MILEAGE_KM_PER_HOUR)+1));
+        account.setMileageKmPerHour(resultSet.getDouble(projectionNameList.indexOf(TABLE_COLUMN_MILEAGE_KM_PER_HOUR) + 1));
         account.setOwner(resultSet.getString(projectionNameList.indexOf(AccountContract.TABLE_COLUMN_OWNER) + 1));
 
         return account;
@@ -141,7 +140,7 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements IAccountD
 
     @Override
     public Account getRow(ResultSet resultSet) throws SQLException {
-        throw  DatabaseConstant.getThrowsFunctionNotSupported(tableName, "resultSet");
+        throw DatabaseConstant.getThrowsFunctionNotSupported(tableName, "resultSet");
     }
 
     @Override
